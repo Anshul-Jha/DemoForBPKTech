@@ -1,0 +1,100 @@
+<form [formGroup]="empFormGroup" autocomplete="off">
+
+
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>First Name</td>
+
+        <td>
+          <input type="text" [(ngModel)]=model.firstName [formControl]="empFormGroup.controls['FirstName']">
+        </td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+
+        <td>
+          <input type="text" [(ngModel)]=model.lastName [formControl]="empFormGroup.controls['LastName']">
+
+        </td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td>
+          <input type="text" [(ngModel)]=model.city [formControl]="empFormGroup.controls['City']">
+        </td>
+      </tr>
+      <tr>
+        <td>Phone Number</td>
+        <td>
+          <input type="text" [(ngModel)]=model.phoneNumber [formControl]="empFormGroup.controls['PhoneNumber']">
+        </td>
+      </tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          <button tabindex="22" mat-raised-button class="btn btn-success" type="button"
+                  [disabled]="!empFormGroup.valid || savingNow" (click)="saveEmployee()">
+            {{ this.model.id > 0 ? 'Update' : 'Create'}}
+          </button>&nbsp;
+          <button tabindex="23" class="btn btn-danger" mat-raised-button color="warn" type="button" appAccordionToggle
+                  [routerLink]="['/', 'srchallanincommings']">
+            Reset
+          </button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+</form>
+
+
+
+
+
+
+
+<h1 id="tableLabel">Employees</h1>
+
+<p *ngIf="!employees"><em>Loading...</em></p>
+
+
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="employees">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>City</th>
+      <th>Phone Number</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{ employee.firstName }}</td>
+      <td>{{ employee.lastName }}</td>
+      <td>{{ employee.city }}</td>
+      <td>{{ employee.phoneNumber }}</td>
+      <td>
+        <button tabindex="22" mat-raised-button class="btn btn-primary" type="button"
+                (click)="GetEmployeeById(employee.id)">
+          Edit
+        </button>&nbsp;
+        <button tabindex="22" mat-raised-button class="btn btn-danger" type="button"
+                (click)="Delete(employee.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
